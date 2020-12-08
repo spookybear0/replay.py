@@ -5,8 +5,16 @@ from helpers import replay
 path = os.path.dirname(os.path.realpath(__file__))
 memory = gd.memory.get_state(load=True)
 
+# my plan is to have notifications
+# like "replay exported" or "replay.py started"
+# this will make the program better
+# I am having some trouble getting the dlls to do this though
+# this should stay at false until they are created
+dlls = False 
+
 def main():
-    memory.inject_dll(path + "\\dlls\\launch.dll")
+    if dlls:
+        memory.inject_dll(path + "\\dlls\\launch.dll")
     replay.start_replay_recorder()
     
     
