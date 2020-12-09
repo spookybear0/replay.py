@@ -6,7 +6,7 @@ path = os.path.dirname(os.path.realpath(__file__))
 Scene = gd.memory.Scene
 LevelType = gd.memory.LevelType
 playing_replay = False
-r = []
+recent = []
 start_time = time()
 
 memory = gd.memory.get_state(load=True)
@@ -43,7 +43,7 @@ def play_input(input: list):
 def play_replay(key, input=None):
     if not input:
         data = [] 
-        global r
+        global recent
         global playing_replay
         global start_time
         playing_replay = True
@@ -60,7 +60,7 @@ def play_replay(key, input=None):
             if data:
                 play_input(data)
             else:
-                play_input(r)
+                play_input(recent)
             print("Done playing")
             break
     if not data:
@@ -87,12 +87,12 @@ def start_replay_recorder():
             if play_layer.percent > 0:
                 start_time = time()
                 print("Recording...")
-                r = record_input()
+                recent = record_input()
                 print("Done")
                 if play_layer.get_percent() >= 100:
                     def export(key):
                         print("Exporting replay")
-                        file.pack_replay_file(r, f"{user_name} - {level.creator_name} - {level.name}.gdr")
+                        file.pack_replay_file(recent, f"{user_name} - {level.creator_name} - {level.name}.gdr")
                         try:
                             keyboard.unhook("f2")
                         except KeyError:
