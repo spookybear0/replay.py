@@ -21,20 +21,16 @@ def record_input():
     global play_layer
     recorded = []
     mouse.hook(recorded.append)
-    #keyboard.hook(recorded.append) # keyboard will be added later
+    # TODO: add keyboard
     while True:
         if play_layer.get_percent() == 0.0:
             play_layer = game_manager.get_play_layer()
         if play_layer.percent >= 100 or play_layer.dead:
             mouse.unhook(recorded.append)
-            #keyboard.unhook(recorded.append)
             newrecorded = []
             for r in recorded:
                 if isinstance(r, mouse.ButtonEvent) and r.button == "left":
                     newrecorded.append(r)
-                #elif isinstance(r, keyboard.KeyboardEvent):
-                #    if r.name == "up" or r.name == "space":
-                #        newrecorded.append(r)
             return newrecorded
 
 def play_input(input: list):

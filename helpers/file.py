@@ -31,14 +31,12 @@ def unpackv2(data: str):
     final = []
     data = data.split("\n")[1].split("|")[:-1]
     for d in data:
-        print(d)
         if d[:2] != "dd" and d[0] == "d": # not double click
             final.append(["down", "left", float(re.findall("[0-9]+.[0-9]+", d)[0])])
         elif d[0] == "u":
             final.append(["up", "left", float(re.findall("[0-9]+.[0-9]+", d)[0])])
         elif d[:2] == "dd":
             final.append(["double", "left", float(re.findall("[0-9]+.[0-9]+", d)[0])])
-    print(final)
     return final
     
 def unpack_replay_file(filename: str):
