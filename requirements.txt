@@ -1,0 +1,3 @@
+git+https://github.com/nekitdev/gd.py/tree/develop/
+keyboard
+mouse

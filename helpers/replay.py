@@ -8,6 +8,7 @@ LevelType = gd.memory.LevelType
 playing_replay = False
 recent = []
 start_time = time()
+started = False
 
 memory = gd.memory.get_state(load=True)
 game_manager = memory.get_game_manager()
@@ -67,7 +68,9 @@ def play_replay_file(replayname):
     play_replay(None, file.unpack_replay_file(replayname))
 
 def start_replay_recorder():
-    while True:
+    global started
+    started = True
+    while started:
         play_layer = game_manager.get_play_layer()
         level = play_layer.get_level_settings().get_level()
         level_type = level.get_level_type()
@@ -102,3 +105,7 @@ def start_replay_recorder():
                     keyboard.hook_key("f2", export, True)
                     keyboard.hook_key("esc", back, False)
                 continue
+            
+def stop_replay_recorder():
+    global started
+    started = False
