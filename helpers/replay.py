@@ -18,6 +18,9 @@ level_type = level.get_level_type()
 account_manager = memory.get_account_manager()
 user_name = account_manager.get_user_name()
 
+def export_replay():
+    file.pack_replay_file(recent, f"{user_name} - {level.creator_name} - {level.name}.gdr")
+
 def record_input():
     global play_layer
     recorded = []
